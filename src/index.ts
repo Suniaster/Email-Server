@@ -1,5 +1,8 @@
 import ServerController from "./Server/ServerController";
+import DictStorage from "./Storage/DictStorage";
 
-const controller = new ServerController();
+
+let storage = new DictStorage();
+const controller = new ServerController({}, storage);
 
 controller.init()
