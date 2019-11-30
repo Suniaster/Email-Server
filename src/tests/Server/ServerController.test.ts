@@ -1,5 +1,5 @@
 
-import ServerController from '../../Server/ServerController';
+import EmailServerController from '../../Server/EmailServerController';
 import { Server } from 'net';
 import { execShellCommand } from '../../utils/helpers';
 
@@ -7,14 +7,14 @@ describe('ServerController', () => {
 
   describe("Creating server", ()=>{
     test('it should create server', ()=>{
-      const server = new ServerController();
+      const server = new EmailServerController();
     
       expect(server.init()).toBeInstanceOf(Server);
       server.close();
     })
     
     test('it should change server options', ()=>{
-      const server = new ServerController({
+      const server = new EmailServerController({
         name: "test133"
       });
   
@@ -23,7 +23,7 @@ describe('ServerController', () => {
   })
 
   test('receives messsage', async ()=>{
-    const server = new ServerController();
+    const server = new EmailServerController();
     server.init(()=>{})
     
     let messages = await server.storage.all();

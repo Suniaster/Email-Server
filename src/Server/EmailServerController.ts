@@ -5,7 +5,7 @@ import { parseEmailString, extendObject } from '../utils/helpers';
 // const { PassThrough, Writable } = require('stream');
 
 
-export default class ServerController{
+export default class EmailServerController{
   server : SMTPServer;
 
   constructor(configs: SMTPServerOptions = {}, public storage:StorageInterface = new DictStorage()){

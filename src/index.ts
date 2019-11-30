@@ -1,8 +1,8 @@
-import ServerController from "./Server/ServerController";
+import EmailServerController from "./Server/EmailServerController";
 import DictStorage from "./Storage/DictStorage";
 
 
 let storage = new DictStorage();
-const controller = new ServerController({}, storage);
+const controller = new EmailServerController({}, storage);
 
 controller.init()
