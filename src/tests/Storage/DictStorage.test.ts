@@ -1,8 +1,8 @@
 import DictStorage from "../../Storage/DictStorage"
-import { StoredObject } from "../../Storage/StorageInterface";
+import { StorageObject } from "../../Storage/StorageInterface";
 
 let storage: DictStorage;
-let templateObject:StoredObject;
+let templateObject:StorageObject;
 
 
 

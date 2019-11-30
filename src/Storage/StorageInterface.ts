@@ -1,6 +1,6 @@
 
-export interface StoredObject{
-  subject: string, to:string, from:string, body: string
+export interface StorageObject{
+  id?:number, subject: string, to:string, from:string, body: string
 }
 
 export interface SearchableObject{
@@ -19,12 +19,12 @@ export default abstract class StorageInterface{
    * @param toStore Object to store in database
    * @returns Número inteiro positivo do id do objeto no storage. Caso haja problemas em salva-lo, retorna -1
    */
-  public abstract async store(toStore:StoredObject):Promise<number>;
+  public abstract async store(toStore:StorageObject):Promise<number>;
 
   /**
    * @returns List of objects matching search params
    */
-  public abstract async search(toSearch:SearchableObject):Promise<StoredObject[]>;
+  public abstract async search(toSearch:SearchableObject):Promise<StorageObject[]>;
 
   /**
    * Delete all stored objects
@@ -34,5 +34,5 @@ export default abstract class StorageInterface{
   /**
    * Return all objects stored
    */
-  public abstract async all():Promise<StoredObject[]>;
+  public abstract async all():Promise<StorageObject[]>;
 }

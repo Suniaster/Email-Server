@@ -1,8 +1,7 @@
 
 import ServerController from '../../Server/ServerController';
 import { Server } from 'net';
-import { exec } from 'child_process';
-
+import { execShellCommand } from '../../utils/helpers';
 
 describe('ServerController', () => {
   test('it should create server', ()=>{
@@ -40,13 +39,15 @@ describe('ServerController', () => {
   test('receives messsage', async ()=>{
     const server = new ServerController();
     server.init(()=>{})
-    // await exec('./scripts/test.sh', (err, out) => {
-    //   console.log(err, out);
-    //   // expect(...some file to be created);
-    //   // done();
-    // });
+    
+    let messages = await server.storage.all();
+    let oldLentgh = messages.length;
+    await execShellCommand('./scripts/test.sh');
+    
+    messages = await server.storage.all();
+    expect(messages.length).toBeGreaterThan(oldLentgh);
     server.close();
-  })
+  }, 1200000);
 
 
 })

@@ -1,4 +1,4 @@
-import StorageInterface, { StoredObject, SearchableObject } from "./StorageInterface";
+import StorageInterface, { StorageObject, SearchableObject } from "./StorageInterface";
 
 export default class DictStorage extends StorageInterface{
 
@@ -9,13 +9,14 @@ export default class DictStorage extends StorageInterface{
     this.objects = {};
   }
 
-  public async store(toStore:StoredObject):Promise<number>{
+  public async store(toStore:StorageObject):Promise<number>{
     this.objects[this.counter] = toStore;
+    this.objects[this.counter].id = this.counter;
     this.counter+=1;
     return this.counter-1;
   }
 
-  public async search(toSearch:SearchableObject):Promise<StoredObject[]>{
+  public async search(toSearch:SearchableObject):Promise<StorageObject[]>{
     let toRet:any = [];
     if(toSearch.id === undefined){
       for (var key in this.objects) {
@@ -39,7 +40,7 @@ export default class DictStorage extends StorageInterface{
     return true;
   }
 
-  public async all():Promise<StoredObject[]>{
+  public async all():Promise<StorageObject[]>{
     let list = [];
     for (var key in this.objects) {
       let obj = this.objects[key];
