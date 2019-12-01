@@ -40,10 +40,12 @@ function parseEmailString(emailStr:string):StorageObject{
   let bodyInic = false;
   lines.forEach((line)=>{
     if(line.startsWith("From")){
-      from = line.split("From: ")[1];
+      let arr = line.split(" ")
+      from = arr[arr.length - 1];
     }
     if(line.startsWith("To")){
-      to = line.split("To: ")[1];
+      let arr = line.split(" ")
+      to = arr[arr.length - 1];
     }
     if(line.startsWith("Subject")){
       subject = line.split("Subject: ")[1];
@@ -54,11 +56,18 @@ function parseEmailString(emailStr:string):StorageObject{
   })
 
   return {
-    to: to.replace('\r', ''),
-    from: from.replace('\r', ''),
-    subject: subject.replace('\r', ''),
-    body: body.replace('\r', '')
+    to:       removeFromString(to, ['\r', '\<', '\>']),
+    from:     removeFromString(from, ['\r', '\<', '\>']),
+    subject:  removeFromString(subject, ['\r']),
+    body:     removeFromString(body, ['\r'])
   }
+}
+
+function removeFromString(str,toRemovelist:string[]):string{
+  toRemovelist.forEach((rm)=>{
+    str = str.replace(rm, '')
+  })
+  return str;
 }
 
 function extendObject(obj, src) {
@@ -66,4 +75,4 @@ function extendObject(obj, src) {
   return obj;
 }
 
-export { execShellCommand , parseEmailString, extendObject}
+export { execShellCommand , parseEmailString, extendObject, removeFromString}
