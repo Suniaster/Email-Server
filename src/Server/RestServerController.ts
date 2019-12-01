@@ -1,5 +1,6 @@
 import express from 'express'
 import StorageInterface from '../Storage/StorageInterface';
+import url  from 'url';
 
 
 export default class RestServerController{
@@ -28,6 +29,14 @@ export default class RestServerController{
     this.app.get('/emails', async (req, res)=>{
       res.status(200).send({
           emails: await this.storage.all()
+        }
+      )
+    })
+
+    /** Search */
+    this.app.get('/emails/search/', async (req, res)=>{
+      res.status(200).send({
+          emails: await this.storage.search(req.query)
         }
       )
     })
