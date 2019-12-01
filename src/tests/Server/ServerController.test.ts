@@ -24,6 +24,7 @@ describe('ServerController', () => {
 
   test('receives messsage', async ()=>{
     const server = new EmailServerController();
+    server.storage.setup();
     server.init(()=>{})
     
     let messages = await server.storage.all();
