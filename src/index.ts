@@ -6,7 +6,7 @@ import RestServerController from "./Server/RestServerController";
 let storage = new DictStorage();
 storage.setup();
 
-const email_controller = new EmailServerController({}, storage);
+const email_controller = new EmailServerController({name: "emailtester.test"}, storage);
 const rest_controller = new RestServerController(storage);
 
 rest_controller.setup();

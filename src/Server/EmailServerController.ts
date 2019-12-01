@@ -7,17 +7,15 @@ import { parseEmailString, extendObject } from '../utils/helpers';
 
 export default class EmailServerController{
   server : SMTPServer;
-
+  name:string;
   constructor(configs: SMTPServerOptions = {}, public storage:StorageInterface = new DictStorage()){
     //! To change later
     const options: SMTPServerOptions = {
-      // disable STARTTLS to allow authentication in clear text mode
       disabledCommands: ['STARTTLS', 'AUTH'],
-      name: "suniaster",
       onData: this.handleMessage
-      // logger: true,
     }
-
+    
+    this.name = configs.name == undefined ? "localhost" : configs.name
     this.server = new SMTPServer(extendObject(options, configs));
   }
 
@@ -35,7 +33,9 @@ export default class EmailServerController{
 
   init(logFun = console.log){
     return this.server.listen(25, ()=>{
-      logFun("Server started, listening on port 25...");
+      logFun(
+        `Email:\tServer started, listening on port 25.\n\tSend Email to some_user@${this.name}`
+        );
     });
   }
 

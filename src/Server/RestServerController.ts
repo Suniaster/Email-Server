@@ -6,7 +6,7 @@ import url  from 'url';
 export default class RestServerController{
 
   private app =  express()
-  public port = 3000;
+  public port = 3001;
   constructor(public storage: StorageInterface){
 
   }
@@ -18,7 +18,7 @@ export default class RestServerController{
   init(){
 
     this.app.listen(this.port,()=>{
-      console.log("REST Server alive")
+      console.log(`REST Server alive on port ${this.port}`)
     });
   }
 
