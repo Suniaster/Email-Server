@@ -18,7 +18,6 @@ export default class EmailServerController{
       // logger: true,
     }
 
-    this.storage.setup();
     this.server = new SMTPServer(extendObject(options, configs));
   }
 

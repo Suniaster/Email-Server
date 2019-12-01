@@ -5,7 +5,7 @@ export default class DictStorage extends StorageInterface{
   private objects;
   private counter:number;
   public setup(){
-    this.counter = 0;
+    this.counter = 1;
     this.objects = {};
   }
 
