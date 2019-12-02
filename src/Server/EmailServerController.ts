@@ -27,6 +27,7 @@ export default class EmailServerController{
       this.storage.store(
         parseEmailString(str)
       )
+      callback();
     })
   }
 
