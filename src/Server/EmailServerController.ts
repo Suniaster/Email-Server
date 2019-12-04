@@ -8,6 +8,7 @@ import { parseEmailString, extendObject } from '../utils/helpers';
 export default class EmailServerController{
   server : SMTPServer;
   name:string;
+  PORT = 25;
   constructor(configs: SMTPServerOptions = {}, public storage:StorageInterface = new DictStorage()){
     //! To change later
     const options: SMTPServerOptions = {
@@ -33,7 +34,7 @@ export default class EmailServerController{
 
 
   init(logFun = console.log){
-    return this.server.listen(25, ()=>{
+    return this.server.listen(this.PORT, ()=>{
       logFun(
         `Email:\tServer started, listening on port 25.\n\tSend Email to some_user@${this.name}`
         );
